@@ -11,7 +11,7 @@ $ kubectl label deployments alpaca-test "canary-" 	# remove
 
 
 
-EXAMPLE:
+# EXAMPLE:
 
 $ kubectl run alpaca-prod \
 --image=gcr.io/kuar-demo/kuard-amd64:1 \
@@ -44,6 +44,41 @@ alpaca-prod ... app=alpaca,env=prod,ver=1
 alpaca-test ... app=alpaca,env=test,ver=2
 bandicoot-prod ... app=bandicoot,env=prod,ver=2
 bandicoot-staging ... app=bandicoot,env=staging,ver=2
+
+
+
+
+
+## more EXAMPLES
+
+
+kubectl get, noting the following:
+
+•-l is the short form of --selector and will query objects with a specified key=value pair.
+•--show-labels will show all the labels of each object returned.
+•-L will add a column to the results returned with the value of the specified label.
+
+
+$ kubectl get pods -l 'env in (production, development)'
+
+
+
+With two pods running, one with label run=barfoo and the other with label run=foobar
+
+$ kubectl get pods --show-labels
+NAME                      READY   ...    LABELS
+barfoo-76081199-h3gwx     1/1     ...    pod-template-hash=76081199,run=barfoo
+foobar-1123019601-6x9w1   1/1     ...    pod-template-hash=1123019601,run=foobar
+
+$ kubectl get pods -Lrun
+NAME                      READY   ...    RUN
+barfoo-76081199-h3gwx     1/1     ...    barfoo
+foobar-1123019601-6x9w1   1/1     ...    foobar
+
+$ kubectl get pods -l run=foobar
+NAME                      READY   ...
+foobar-1123019601-6x9w1   1/1     ...
+
 
 
 

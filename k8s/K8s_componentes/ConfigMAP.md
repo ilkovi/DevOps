@@ -5,12 +5,46 @@
 # Conigmaps are used to provide configuration information for workloads
 - a short string
 - comprihensive value in the form of a string
+( provide configuration data to a pod via environment variables or a file )
+
+
+
+
+### 2 Types
+
+# From LITERAL
+Let’s say you want to create a configuration with the key siseversion and the value 0.9.
+kubectl create configmap siseconfig --from-literal=siseversion=0.9
+
+
+IN the POD/Deployment add the following
+
+    spec:
+      containers:
+      - name:                sise
+        image:               mhausenblas/simpleservice:0.5.0
+        ports:
+        - containerPort:     9876
+        env:
+        - name:              SIMPLE_SERVICE_VERSION
+          valueFrom:
+            configMapKeyRef:
+              name:          siseconfig
+              key:           siseversion
+
+
+# FROM FILE
+$ kubectl create configmap configfile --from-file=example.cfg
+
+Now you can use the config map just as you would any other volume
+
+
 
 
 
 
 ### CONFIG MAP
-think of it as a small filesytem
+Think of it as a small filesytem
 - environment variable 
 - command lines for your containers
 - it is conmbined witht the POD right before run

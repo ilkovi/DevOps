@@ -52,18 +52,6 @@ kubectl get events --sort-by=.metadata.creationTimestamp
 
 
 
-### kube-proxy
-
- export POD_NAME=$(kubectl get pods -n kube-system -l "app=kubernetes-dashboard,release=dashboard" -o jsonpath="{.items[0].metadata.name}")
- 
- # if not specify --address , it is only to 127.0.0.1
- 
- kubectl -n kube-system port-forward $POD_NAME 8443:8443 --address 0.0.0.0
-
-
-
-
-
 #### Print KUBELET configuration with KUBEADMIN
 
 kubeadm config print init-defaults --component-configs KubeletConfiguration

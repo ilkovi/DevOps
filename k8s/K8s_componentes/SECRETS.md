@@ -17,12 +17,28 @@ Secrets enable container images to be created without handling sensitive data
 
 Container remain portable across envionments.
 
-Secrets are exposed to pods via explicit declaration in por manifest and k8s APOI
+Secrets are exposed to pods via explicit declaration in pod manifest and k8s API
 
 
-NOTE:
-Prior k8s v 1.6 a root user in any node coudl revial all secrets
+` NOTE:
+Prior k8s v 1.6 a root user in any node could revial all secrets
 That was fixed in the 1.7
+
+
+# 3 Types
+IT have 3 types of secrets
+
+* docker-registry 
+
+* gneric - create a secret from local file/directority or literal value ( based64-encode it yourself )
+
+* tls - a secure certificate for ingress
+
+
+` NOTE
+Prior to Kubernetes 1.7, the API server stored secrets as plain text in etcd
+Now you have the option to encrypt them using the --experimental-encryption-provider-config option when launching the kube-apiserver.
+
 
 
 
@@ -134,6 +150,9 @@ spec:
   imagePullSecrets: 
   -name: my-image-pull-secret
 ....
+
+
+
 
 
 
