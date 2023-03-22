@@ -1,4 +1,19 @@
 
+### Enabling Autocomplete for kubectl
+
+$ source <(kubectl completion bash)
+
+
+### kubectl cheat sheet
+
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+
+https://kubernetes.io/docs/reference/kubectl/overview/
+
+
+
+
+
 #### KUBECTL commands
 
 
